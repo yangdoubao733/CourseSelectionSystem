@@ -1,5 +1,6 @@
-#include<stdio.h>
+#ifndef SELECT
+#define SELECT
 
-void selectCourse(){
-    
-}
+void selectCourse();
+
+#endif

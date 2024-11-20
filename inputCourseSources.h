@@ -1,5 +1,6 @@
-#include<stdio.h>
+#ifndef INPUT
+#define INPUT
 
-void inputCourseSources(){
-    
-}
+void inputCourseSources();
+
+#endif

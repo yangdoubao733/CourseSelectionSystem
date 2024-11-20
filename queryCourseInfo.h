@@ -1,5 +1,6 @@
-#include<stdio.h>
+#ifndef QUERY
+#define QUERY
 
-void queryCourseInfo(){
-    
-}
+void queryCourseInfo();
+
+#endif

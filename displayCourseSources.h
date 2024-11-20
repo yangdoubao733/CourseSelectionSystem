@@ -1,5 +1,6 @@
-#include<stdio.h>
+#ifndef DISPLAY
+#define DISPLAY
 
-void displayCourseSources(){
-    
-}
+void displayCourseSources();
+
+#endif

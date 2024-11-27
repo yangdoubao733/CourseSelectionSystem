@@ -1,6 +1,6 @@
 #ifndef DISPLAY
 #define DISPLAY
 
-void displayCourseSources();
+void displayCourseSources(struct course readCourseInfo[]);
 
 #endif

@@ -13,6 +13,7 @@ typedef struct course
     int course_practiceHour;
     int course_term;
 };
+
 typedef struct student
 {
     char* student_name;

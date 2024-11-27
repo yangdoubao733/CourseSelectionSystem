@@ -1,12 +1,23 @@
-void displayCourseSources(struct course* readCourseInfo)
+#include <csv.h>
+void displayCourseSources(struct course readCourseInfo[])
 {
-    for (int i = 0; i < 50; i++)
+    while (1)
     {
-        if (readCourseInfo[i].course_id == -1)
+        int i=0;
+        if (readCourseInfo[i].course_id==-1)
         {
             break;
         }
-        printf("Course ID: %d\n", readCourseInfo[i].course_id)
+        printf("%d %s %s %d %d %d\n", readCourseInfo[i].course_id, 
+        readCourseInfo[i].course_name,
+        readCourseInfo[i].course_property, 
+        readCourseInfo[i].course_credit,
+        readCourseInfo[i].course_totalHour,
+        readCourseInfo[i].course_classHour,
+        readCourseInfo[i].course_practiceHour,
+        readCourseInfo[i].course_term);
+        i++;
     }
+    
     
 }

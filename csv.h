@@ -6,7 +6,7 @@ typedef struct course
 {
     int course_id;
     char* course_name;
-    char course_property;
+    char* course_property;
     int course_credit;
     int course_totalHour;
     int course_classHour;
@@ -20,11 +20,10 @@ typedef struct student
     int student_selectedCourseId[50];
 };
 
-
-
-struct course* readCourseInfo(); //返回一个数组，
+//函数声明
+struct course* readCourseInfo(struct course course_info[]); //返回一个数组
 int writeCourseInfo(struct course new_course); //输入一个数组，将课程写入文件course.csv
-struct student readStudentInfo(); //返回一个数组包含所有学生
+struct student* readStudentInfo(struct student* student_info); //返回一个数组包含所有学生
 int writeStudentInfo(); //将学生信息写入文件student.csv
 
 #endif

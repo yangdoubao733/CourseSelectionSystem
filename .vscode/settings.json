@@ -61,17 +61,24 @@
     "math.h": "c",
     "selectcourse.h": "c"
   },
-  "files.encoding": "utf8",
+  "files.encoding": "gbk",
   "terminal.integrated.profiles.windows": {
-      "Command Prompt": {
-          "path": "C:\\Windows\\System32\\cmd.exe",
-          "args": ["-NoExit", "/K", "chcp 65001"]
-      },
-      "PowerShell": {
-          "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-          "args": ["-NoExit", "/C", "chcp 65001"]
-      }
+    "Command Prompt": {
+      "path": "C:\\Windows\\System32\\cmd.exe",
+      "args": [
+        "-NoExit",
+        "/K",
+        "chcp 65001"
+      ]
+    },
+    "PowerShell": {
+      "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "args": [
+        "-NoExit",
+        "/C",
+        "chcp 65001"
+      ]
+    }
   },
   "terminal.integrated.defaultProfile.windows": "Command Prompt"
-
 }

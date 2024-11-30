@@ -5,7 +5,7 @@ void displayCourseSources()
 {
     struct course courseInfo[MAX_VALUE];
     readCourseInfo(courseInfo);
-    printf("id ฟฮณฬร๛ ฟฮณฬะิึส ังทึ ืÜังสฑ สฺฟฮังสฑ สตั้ังสฑ ังฦฺ");
+    printf("id ่ฏพ็จๅ็งฐ ่ฏพ็จๆ€ง่ดจ ๅญฆๅ ๆ€ปๅญฆๆ—ถ ๆ•ๅญฆ่ฏพๆ—ถ ๅฎ่ทต่ฏพๆ—ถ ๅญฆๆ\n");
     while (1)
     {
         

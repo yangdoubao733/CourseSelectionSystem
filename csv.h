@@ -2,6 +2,7 @@
 #ifndef CSV
 #define CSV
 #define MAX_VALUE 514 // 最大值
+#define MAX_COURSE 50 // 最大课程数
 typedef struct course
 {
     int course_id; //id

@@ -5,7 +5,7 @@
 #include"selectCourse.h"
 
 int menu(){
-    printf("1.录入课程\n2.查看所有课程\n3.查询课程\n4.选择课程\n请输入你想使用的功能");
+    printf("1.录入课程\n2.查看所有课程\n3.查询课程\n4.选择课程\n5.退出\n请输入你想使用的功能");
     int n;
     scanf("%d",&n);
     switch (n)
@@ -23,8 +23,9 @@ int menu(){
         selectCourse();
         break;
     case 5:
-        return 0;
+        exit(0);
     default:
-        return 1;
+        printf("请正确输入");
+        menu();
     }
 }

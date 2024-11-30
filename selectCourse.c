@@ -11,10 +11,10 @@ void selectCourse(){
     printf("请依次输入您要选的课程id，输入‘-1’表示结束(注；每人仅可选择一次，结束后不可修改)");
     for (int i = 0; i <=MAX_VALUE; i++)
     {scanf("%d\n",&n);
-    n=studentInfo.student_selectedCourseId[i];
+    studentInfo.student_selectedCourseId[i]=n;
      if (n==-1)
      {printf("选课结束");
-    n=studentInfo.student_selectedCourseId[i];
+    studentInfo.student_selectedCourseId[i]=n;
      break;
      }
      }

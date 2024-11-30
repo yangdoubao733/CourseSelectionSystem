@@ -14,8 +14,16 @@ int writeCourseInfo(struct course new_course) // 输入课程信息并将其写入文件cours
     file = fopen("course.csv", "a");
     if (file == NULL) {
         perror("无法打开文件");
-        return 1;
+        menu();
     }
+    if (new_course.course_id == -1)
+    {
+        // 关闭文件
+        fclose(file);
+        menu();
+
+    }
+    
     fprintf(file, "%d,%s,%s,%d,%d,%d,%d,%d\n", 
         new_course.course_id, 
         new_course.course_name, 
@@ -40,7 +48,7 @@ void readCourseInfo(struct course course_info[])//接受一个数组，将文件中的课程信
     file = fopen("course.csv", "r");
     if (file == NULL) {
         perror("无法打开文件");
-        exit(0);
+        menu();
     }
 
     // 读取文件内容，并将其存储到结构体指针数组中
@@ -100,7 +108,6 @@ void readCourseInfo(struct course course_info[])//接受一个数组，将文件中的课程信
     course_info[i].course_id= -1;
     // 关闭文件
     fclose(file);
-    
 }
 
 void readStudentInfo(struct student student_info[]) //接受一个数组，将文件中的学生信息读入数组中
@@ -122,7 +129,7 @@ void readStudentInfo(struct student student_info[]) //接受一个数组，将文件中的学
         {
             int i = 0;
             if (fgets(line, sizeof(line), file) == NULL) {
-                    exit(0);
+                    break;
                 }
             //取前面学生的id值和姓名
             char *token;
@@ -133,20 +140,19 @@ void readStudentInfo(struct student student_info[]) //接受一个数组，将文件中的学
             token = strtok(NULL, ",");
             student_info[i].student_name = token; 
             //取后面课程的id值
-            for (int j = 0; j < MAX_COURSE; j++)
+            int j = 0;
+            for (j = 0; j < MAX_COURSE-1; j++)
             {
-                int temp;
                 token = strtok(NULL, ",");
-                token = strtok(NULL, ",");
-                temp = atoi(token);
-
+                
                 if (token == NULL)
                 {
                     break;
                 }
-                
-                selectedCourseId[j] = temp;
+                student_info[i].student_selectedCourseId[j] = atoi(token);
             }
+            // 续尾巴，告诉数组截至,读到-1表示数组截至了。
+            student_info[i].student_selectedCourseId[j+1] = -1;
             i++;
 
         }
@@ -166,7 +172,7 @@ int writeStudentInfo(struct student new_student) // 输入学生信息并将其写入文件st
     file = fopen("student.csv", "a");
     if (file == NULL) {
         perror("无法打开文件");
-        exit(0);
+        menu();
     }
 
     fprintf(file, "%d,%s", 
@@ -174,11 +180,11 @@ int writeStudentInfo(struct student new_student) // 输入学生信息并将其写入文件st
             new_student.student_name);
             for (int i = 0; i < 50; i++)
             {
+                fprintf(file, ",%d", new_student.student_selectedCourseId[i]);
                 if (new_student.student_selectedCourseId[i] == -1)
                 {
                     break;
-                }
-                fprintf(file, ",%d", new_student.student_selectedCourseId[i]);
+                }  
             }
             
     // 关闭文件

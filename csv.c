@@ -4,16 +4,16 @@
 #include <string.h>
 #include "csv.h"
 
-/*
-int writeCourseInfo(struct course new_course) // è¾“å…¥è¯¾ç¨‹ä¿¡æ¯å¹¶å°†å…¶å†™å…¥æ–‡ä»¶course.csv
+
+int writeCourseInfo(struct course new_course) // ÊäÈë¿Î³ÌĞÅÏ¢²¢½«ÆäĞ´ÈëÎÄ¼şcourse.csv
 {
     FILE *file;
-    //struct course new_course; åˆ›å»ºç»“æ„ä½“å®ä¾‹
+    //struct course new_course; ´´½¨½á¹¹ÌåÊµÀı
 
-    // æ‰“å¼€CSVæ–‡ä»¶ï¼Œ"a"è¡¨ç¤ºä»¥è¿½åŠ æ¨¡å¼æ‰“å¼€
+    // ´ò¿ªCSVÎÄ¼ş£¬"a"±íÊ¾ÒÔ×·¼ÓÄ£Ê½´ò¿ª
     file = fopen("course.csv", "a");
     if (file == NULL) {
-        perror("æ— æ³•æ‰“å¼€æ–‡ä»¶");
+        perror("ÎŞ·¨´ò¿ªÎÄ¼ş");
         return 1;
     }
     fprintf(file, "%d,%s,%s,%d,%d,%d,%d,%d\n", 
@@ -25,25 +25,25 @@ int writeCourseInfo(struct course new_course) // è¾“å…¥è¯¾ç¨‹ä¿¡æ¯å¹¶å°†å…¶å†™å
         new_course.course_classHour, 
         new_course.course_practiceHour, 
         new_course.course_term);
-    // å…³é—­æ–‡ä»¶
+    // ¹Ø±ÕÎÄ¼ş
     fclose(file);
     
     return 0;
 }
 
-struct course* readCourseInfo(struct course course_info[])//æ¥å—ä¸€ä¸ªæ•°ç»„ï¼Œå°†æ–‡ä»¶ä¸­çš„è¯¾ç¨‹ä¿¡æ¯è¯»å…¥æ•°ç»„ä¸­,å¹¶è¿”å›æŒ‡é’ˆ
+void readCourseInfo(struct course course_info[])//½ÓÊÜÒ»¸öÊı×é£¬½«ÎÄ¼şÖĞµÄ¿Î³ÌĞÅÏ¢¶ÁÈëÊı×éÖĞ
 {
     FILE *file;
     int i = 0;
 
-    // æ‰“å¼€CSVæ–‡ä»¶ï¼Œ"r"è¡¨ç¤ºä»¥åªè¯»æ¨¡å¼æ‰“å¼€
+    // ´ò¿ªCSVÎÄ¼ş£¬"r"±íÊ¾ÒÔÖ»¶ÁÄ£Ê½´ò¿ª
     file = fopen("course.csv", "r");
     if (file == NULL) {
-        perror("æ— æ³•æ‰“å¼€æ–‡ä»¶");
+        perror("ÎŞ·¨´ò¿ªÎÄ¼ş");
         exit(0);
     }
 
-    // è¯»å–æ–‡ä»¶å†…å®¹ï¼Œå¹¶å°†å…¶å­˜å‚¨åˆ°ç»“æ„ä½“æŒ‡é’ˆæ•°ç»„ä¸­
+    // ¶ÁÈ¡ÎÄ¼şÄÚÈİ£¬²¢½«Æä´æ´¢µ½½á¹¹ÌåÖ¸ÕëÊı×éÖĞ
     while (1) {
         char line[MAX_VALUE];
         if (fgets(line, sizeof(line), file) == NULL) {
@@ -80,7 +80,7 @@ struct course* readCourseInfo(struct course course_info[])//æ¥å—ä¸€ä¸ªæ•°ç»„ï¼
         i++;
 
     }
-    //ç»­å°¾å·´ï¼Œå‘Šè¯‰æ•°ç»„æˆªè‡³,è¯»åˆ°-1è¡¨ç¤ºæ•°ç»„æˆªè‡³äº†ã€‚
+    //ĞøÎ²°Í£¬¸æËßÊı×é½ØÖÁ,¶Áµ½-1±íÊ¾Êı×é½ØÖÁÁË¡£
     course_info->course_classHour= -1;
     course_info->course_practiceHour= -1;
     course_info->course_term= -1;
@@ -89,26 +89,25 @@ struct course* readCourseInfo(struct course course_info[])//æ¥å—ä¸€ä¸ªæ•°ç»„ï¼
     course_info->course_property= NULL;
     course_info->course_name= NULL;
     course_info->course_id= -1;
-    // å…³é—­æ–‡ä»¶
+    // ¹Ø±ÕÎÄ¼ş
     fclose(file);
-    return course_info;
     
 }
 
-struct student* readStudentInfo(struct student student_info[]) // è¯»å–æ–‡ä»¶student.csvä¸­çš„å­¦ç”Ÿä¿¡æ¯å¹¶è¿”å›ä¸€ä¸ªæ•°ç»„
+void readStudentInfo(struct student student_info[]) //½ÓÊÜÒ»¸öÊı×é£¬½«ÎÄ¼şÖĞµÄÑ§ÉúĞÅÏ¢¶ÁÈëÊı×éÖĞ
     
 {
     FILE *file;
     
     
-    // æ‰“å¼€CSVæ–‡ä»¶ï¼Œ"r"è¡¨ç¤ºä»¥åªè¯»æ¨¡å¼æ‰“å¼€
+    // ´ò¿ªCSVÎÄ¼ş£¬"r"±íÊ¾ÒÔÖ»¶ÁÄ£Ê½´ò¿ª
     file = fopen("student.csv", "r");
     if (file == NULL) {
-        perror("æ— æ³•æ‰“å¼€æ–‡ä»¶");
+        perror("ÎŞ·¨´ò¿ªÎÄ¼ş");
         exit(0);
     }
 
-    // è¯»å–æ–‡ä»¶å†…å®¹ï¼Œå¹¶å°†å…¶å­˜å‚¨åˆ°ç»“æ„ä½“å®ä¾‹ä¸­
+    // ¶ÁÈ¡ÎÄ¼şÄÚÈİ£¬²¢½«Æä´æ´¢µ½½á¹¹ÌåÊµÀıÖĞ
     char line[MAX_VALUE];
     while (1)
         {
@@ -116,7 +115,7 @@ struct student* readStudentInfo(struct student student_info[]) // è¯»å–æ–‡ä»¶st
             if (fgets(line, sizeof(line), file) == NULL) {
                     exit(0);
                 }
-            //å–å‰é¢å­¦ç”Ÿçš„idå€¼å’Œå§“å
+            //È¡Ç°ÃæÑ§ÉúµÄidÖµºÍĞÕÃû
             char *token;
             token = strtok(line, ",");
             int student_id = atoi(token);
@@ -125,11 +124,11 @@ struct student* readStudentInfo(struct student student_info[]) // è¯»å–æ–‡ä»¶st
             char student_name[100];
             strcpy(student_name, token);
             strcpy(student_info[i].student_name, student_name);
-            //å–åé¢è¯¾ç¨‹çš„idå€¼
+            //È¡ºóÃæ¿Î³ÌµÄidÖµ
             int selectedCourseId[50];
             i++;
             // printf("%d,%s,%d\n", student_info[i].student_id, student_info[i].student_name, student_info[i].student_selectedCourseId[i]);
-            //æµ‹è¯•å¤‡ç”¨ï¼Œaiè¯´çš„ï¼›
+            //²âÊÔ±¸ÓÃ£¬aiËµµÄ£»
             for (int j = 0; j < 50; j++)
             {
                 int temp;
@@ -146,23 +145,21 @@ struct student* readStudentInfo(struct student student_info[]) // è¯»å–æ–‡ä»¶st
 
         }
 
-    // å…³é—­æ–‡ä»¶
+    // ¹Ø±ÕÎÄ¼ş
     fclose(file);
-
-    return student_info;
     
     
 }
 
-int writeStudentInfo(struct student new_student) // è¾“å…¥å­¦ç”Ÿä¿¡æ¯å¹¶å°†å…¶å†™å…¥æ–‡ä»¶student.csv
+int writeStudentInfo(struct student new_student) // ÊäÈëÑ§ÉúĞÅÏ¢²¢½«ÆäĞ´ÈëÎÄ¼şstudent.csv
 
 {
     FILE *file;
 
-    // æ‰“å¼€CSVæ–‡ä»¶ï¼Œ"a"è¡¨ç¤ºä»¥è¿½åŠ æ¨¡å¼æ‰“å¼€
+    // ´ò¿ªCSVÎÄ¼ş£¬"a"±íÊ¾ÒÔ×·¼ÓÄ£Ê½´ò¿ª
     file = fopen("student.csv", "a");
     if (file == NULL) {
-        perror("æ— æ³•æ‰“å¼€æ–‡ä»¶");
+        perror("ÎŞ·¨´ò¿ªÎÄ¼ş");
         exit(0);
     }
 
@@ -178,7 +175,7 @@ int writeStudentInfo(struct student new_student) // è¾“å…¥å­¦ç”Ÿä¿¡æ¯å¹¶å°†å…¶å
                 fprintf(file, ",%d", new_student.student_selectedCourseId[i]);
             }
             
-    // å…³é—­æ–‡ä»¶
+    // ¹Ø±ÕÎÄ¼ş
     fclose(file);
     
     return 0;
@@ -212,7 +209,7 @@ int writeCourseInfo(struct course new_course) // è¾“å…¥è¯¾ç¨‹ä¿¡æ¯å¹¶å°†å…¶å†™å
     return 0;
 }
 
-struct course* readCourseInfo(struct course course_info[]) // æ¥å—ä¸€ä¸ªæ•°ç»„ï¼Œå°†æ–‡ä»¶ä¸­çš„è¯¾ç¨‹ä¿¡æ¯è¯»å…¥æ•°ç»„ä¸­,å¹¶è¿”å›æŒ‡é’ˆ
+struct course* readCourseInfo(struct course course_info[]) // æ¥å—ä¸€ä¸ªæ•°ç»„ï¼Œå°†æ–‡ä»¶ä¸­çš„è¯¾ç¨‹ä¿¡æ¯è¯»å…¥æ•°ç»„ä¸­,å¹¶è¿”å›æŒ‡é’?
 {
     FILE *file;
     int i = 0;
@@ -278,15 +275,15 @@ struct course* readCourseInfo(struct course course_info[]) // æ¥å—ä¸€ä¸ªæ•°ç»„
     course_info[i].course_term = -1;
     course_info[i].course_totalHour = -1;
     course_info[i].course_credit = -1;
-    course_info[i].course_property[0] = '\0'; // å­—ç¬¦ä¸²æ¸…ç©º
-    course_info[i].course_name[0] = '\0';     // å­—ç¬¦ä¸²æ¸…ç©º
+    course_info[i].course_property[0] = '\0'; // å­—ç¬¦ä¸²æ¸…ç©?
+    course_info[i].course_name[0] = '\0';     // å­—ç¬¦ä¸²æ¸…ç©?
     course_info[i].course_id = -1;
 
     fclose(file);
     return course_info;
 }
 
-struct student* readStudentInfo(struct student student_info[]) // è¯»å–æ–‡ä»¶student.csvä¸­çš„å­¦ç”Ÿä¿¡æ¯å¹¶è¿”å›ä¸€ä¸ªæ•°ç»„
+struct student* readStudentInfo(struct student student_info[]) // è¯»å–æ–‡ä»¶student.csvä¸­çš„å­¦ç”Ÿä¿¡æ¯å¹¶è¿”å›ä¸€ä¸ªæ•°ç»?
 {
     FILE *file;
     
@@ -297,7 +294,7 @@ struct student* readStudentInfo(struct student student_info[]) // è¯»å–æ–‡ä»¶st
     }
 
     char line[MAX_VALUE];
-    int i = 0; // å°† i ç§»åˆ°è¿™é‡Œï¼Œé¿å…æ¯æ¬¡å¾ªç¯éƒ½é‡ç½®
+    int i = 0; // å°? i ç§»åˆ°è¿™é‡Œï¼Œé¿å…æ¯æ¬¡å¾ªç¯éƒ½é‡ç½®
     while (1) {
         if (fgets(line, sizeof(line), file) == NULL) {
             break;
@@ -306,14 +303,14 @@ struct student* readStudentInfo(struct student student_info[]) // è¯»å–æ–‡ä»¶st
         char *token;
         token = strtok(line, ",");
         int student_id = atoi(token);
-        sprintf(student_info[i].student_id, "%d", student_id); // å°†æ•´æ•°è½¬æ¢ä¸ºå­—ç¬¦ä¸²
+        sprintf(student_info[i].student_id, "%d", student_id); // å°†æ•´æ•°è½¬æ¢ä¸ºå­—ç¬¦ä¸?
 
         token = strtok(NULL, ",");
         char student_name[100];
         strcpy(student_name, token);
         strcpy(student_info[i].student_name, student_name);
 
-        // è¯»åé¢è¯¾ç¨‹çš„idå€¼
+        // è¯»åé¢è¯¾ç¨‹çš„idå€?
         for (int j = 0; j < 50; j++) {
             token = strtok(NULL, ",");
             if (token == NULL) {
@@ -321,7 +318,7 @@ struct student* readStudentInfo(struct student student_info[]) // è¯»å–æ–‡ä»¶st
             }
             student_info[i].student_selectedCourseId[j] = atoi(token);
         }
-        student_info[i].student_selectedCourseId[50] = -1; // è¯¾ç¨‹é€‰æ‹©æ•°ç»„çš„ç»“æŸæ ‡è®°
+        student_info[i].student_selectedCourseId[50] = -1; // è¯¾ç¨‹é€‰æ‹©æ•°ç»„çš„ç»“æŸæ ‡è®?
 
         i++;
     }

@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "csv.h"
-
+#include "menu.h"
 
 int writeCourseInfo(struct course new_course) // 输入课程信息并将其写入文件course.csv
 {
@@ -51,27 +51,36 @@ void readCourseInfo(struct course course_info[])//接受一个数组，将文件中的课程信
         }
         char *token;
         token = strtok(line, ",");
+        //取课程的id值
         int course_id = atoi(token);
         token = strtok(NULL, ",");
+        //取课程的名称
         char course_name[100];
         strcpy(course_name, token);
+        //取课程的属性
         token = strtok(NULL, ",");
         char course_property[100];
+        //取课程的学分
         strcpy(course_property, token);
         token = strtok(NULL, ",");
+        //取课程的总学时
         int course_credit = atoi(token);
         token = strtok(NULL, ",");
+        //取课程的总学时
         int course_totalHour = atoi(token);
         token = strtok(NULL, ",");
+        //取课程的上课学时
         int course_classHour = atoi(token);
         token = strtok(NULL, ",");
+        //取课程的实践学时
         int course_practiceHour = atoi(token);
         token = strtok(NULL, ",");
+        //取课程的学期
         int course_term = atoi(token);
-        course_info = (struct course*)realloc(course_info, (i+1)*sizeof(struct course));
+        //course_info = (struct course*)realloc(course_info, (i+1)*sizeof(struct course));
         course_info[i].course_id = course_id;
-        sprintf(course_info[i].course_name, "%s", course_name);
-        sprintf(course_info[i].course_property, "%s", course_property);
+        course_info[i].course_name = course_name;
+        course_info[i].course_property = course_property;
         course_info[i].course_credit = course_credit;
         course_info[i].course_totalHour = course_totalHour;
         course_info[i].course_classHour = course_classHour;
@@ -81,14 +90,14 @@ void readCourseInfo(struct course course_info[])//接受一个数组，将文件中的课程信
 
     }
     //续尾巴，告诉数组截至,读到-1表示数组截至了。
-    course_info->course_classHour= -1;
-    course_info->course_practiceHour= -1;
-    course_info->course_term= -1;
-    course_info->course_totalHour= -1;
-    course_info->course_credit= -1;
-    course_info->course_property= NULL;
-    course_info->course_name= NULL;
-    course_info->course_id= -1;
+    course_info[i].course_classHour= -1;
+    course_info[i].course_practiceHour= -1;
+    course_info[i].course_term= -1;
+    course_info[i].course_totalHour= -1;
+    course_info[i].course_credit= -1;
+    course_info[i].course_property= NULL;
+    course_info[i].course_name= NULL;
+    course_info[i].course_id= -1;
     // 关闭文件
     fclose(file);
     
@@ -104,7 +113,7 @@ void readStudentInfo(struct student student_info[]) //接受一个数组，将文件中的学
     file = fopen("student.csv", "r");
     if (file == NULL) {
         perror("无法打开文件");
-        exit(0);
+        menu();
     }
 
     // 读取文件内容，并将其存储到结构体实例中
@@ -117,23 +126,20 @@ void readStudentInfo(struct student student_info[]) //接受一个数组，将文件中的学
                 }
             //取前面学生的id值和姓名
             char *token;
+            //取学生的id值
             token = strtok(line, ",");
-            int student_id = atoi(token);
-            strcpy(student_info[i].student_id, student_id);
+            student_info[i].student_id = atoi(token);
+            //取学生的姓名
             token = strtok(NULL, ",");
-            char student_name[100];
-            strcpy(student_name, token);
-            strcpy(student_info[i].student_name, student_name);
+            student_info[i].student_name = token; 
             //取后面课程的id值
-            int selectedCourseId[50];
-            i++;
-            // printf("%d,%s,%d\n", student_info[i].student_id, student_info[i].student_name, student_info[i].student_selectedCourseId[i]);
-            //测试备用，ai说的；
-            for (int j = 0; j < 50; j++)
+            for (int j = 0; j < MAX_COURSE; j++)
             {
                 int temp;
                 token = strtok(NULL, ",");
+                token = strtok(NULL, ",");
                 temp = atoi(token);
+
                 if (token == NULL)
                 {
                     break;
@@ -141,7 +147,7 @@ void readStudentInfo(struct student student_info[]) //接受一个数组，将文件中的学
                 
                 selectedCourseId[j] = temp;
             }
-
+            i++;
 
         }
 

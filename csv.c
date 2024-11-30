@@ -15,13 +15,14 @@ int writeCourseInfo(struct course new_course) // 输入课程信息并将其写入文件cours
     if (file == NULL) {
         perror("无法打开文件");
         menu();
+        return -1;
     }
     if (new_course.course_id == -1)
     {
         // 关闭文件
         fclose(file);
         menu();
-
+        return 0;
     }
     
     fprintf(file, "%d,%s,%s,%d,%d,%d,%d,%d\n", 
@@ -33,13 +34,14 @@ int writeCourseInfo(struct course new_course) // 输入课程信息并将其写入文件cours
         new_course.course_classHour, 
         new_course.course_practiceHour, 
         new_course.course_term);
+
     // 关闭文件
     fclose(file);
     
     return 0;
 }
 
-void readCourseInfo(struct course course_info[])//接受一个数组，将文件中的课程信息读入数组中
+int readCourseInfo(struct course course_info[])//接受一个数组，将文件中的课程信息读入数组中
 {
     FILE *file;
     int i = 0;
@@ -49,18 +51,21 @@ void readCourseInfo(struct course course_info[])//接受一个数组，将文件中的课程信
     if (file == NULL) {
         perror("无法打开文件");
         menu();
+        return -1;
     }
 
     // 读取文件内容，并将其存储到结构体指针数组中
-    while (1) {
+    for(i = 0; i < MAX_COURSE - 1; i++) {
         char line[MAX_VALUE];
         if (fgets(line, sizeof(line), file) == NULL) {
             break;
         }
+
         char *token;
         token = strtok(line, ",");
         //取课程的id值
         int course_id = atoi(token);
+
         token = strtok(NULL, ",");
         //取课程的名称
         char course_name[100];
@@ -94,7 +99,6 @@ void readCourseInfo(struct course course_info[])//接受一个数组，将文件中的课程信
         course_info[i].course_classHour = course_classHour;
         course_info[i].course_practiceHour = course_practiceHour;
         course_info[i].course_term = course_term;
-        i++;
 
     }
     //续尾巴，告诉数组截至,读到-1表示数组截至了。
@@ -108,9 +112,10 @@ void readCourseInfo(struct course course_info[])//接受一个数组，将文件中的课程信
     course_info[i].course_id= -1;
     // 关闭文件
     fclose(file);
+    return 0;
 }
 
-void readStudentInfo(struct student student_info[]) //接受一个数组，将文件中的学生信息读入数组中
+int readStudentInfo(struct student student_info[]) //接受一个数组，将文件中的学生信息读入数组中
     
 {
     FILE *file;
@@ -121,13 +126,13 @@ void readStudentInfo(struct student student_info[]) //接受一个数组，将文件中的学
     if (file == NULL) {
         perror("无法打开文件");
         menu();
+        return -1;
     }
 
     // 读取文件内容，并将其存储到结构体实例中
     char line[MAX_VALUE];
-    while (1)
+    for (int i = 0; i < MAX_VALUE - 1; i++)
         {
-            int i = 0;
             if (fgets(line, sizeof(line), file) == NULL) {
                     break;
                 }
@@ -153,7 +158,6 @@ void readStudentInfo(struct student student_info[]) //接受一个数组，将文件中的学
             }
             // 续尾巴，告诉数组截至,读到-1表示数组截至了。
             student_info[i].student_selectedCourseId[j+1] = -1;
-            i++;
 
         }
 
@@ -173,18 +177,26 @@ int writeStudentInfo(struct student new_student) // 输入学生信息并将其写入文件st
     if (file == NULL) {
         perror("无法打开文件");
         menu();
+        return -1;
     }
-
+    if (new_student.student_id == -1)
+    {
+        // 关闭文件
+        fclose(file);
+        menu();
+    }
+    
     fprintf(file, "%d,%s", 
             new_student.student_id, 
             new_student.student_name);
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < MAX_COURSE - 1; i++)
             {
-                fprintf(file, ",%d", new_student.student_selectedCourseId[i]);
+                
                 if (new_student.student_selectedCourseId[i] == -1)
                 {
                     break;
                 }  
+                fprintf(file, ",%d", new_student.student_selectedCourseId[i]);
             }
             
     // 关闭文件

@@ -55,13 +55,17 @@ int readCourseInfo(struct course course_info[])//½ÓÊÜÒ»¸öÊı×é£¬½«ÎÄ¼şÖĞµÄ¿Î³ÌĞÅÏ
     }
 
     // ¶ÁÈ¡ÎÄ¼şÄÚÈİ£¬²¢½«Æä´æ´¢µ½½á¹¹ÌåÖ¸ÕëÊı×éÖĞ
-    for(i = 0; i < MAX_COURSE - 1; i++) {
-        char line[MAX_VALUE];
-        if (fgets(line, sizeof(line), file) == NULL) {
-            break;
-        }
-
+    char line[MAX_VALUE];
+    while (fgets(line, sizeof(line), file) != NULL){
+        if(i == MAX_VALUE)break;
         char *token;
+        char *temp;
+        // È¥³ı»»ĞĞ·û
+        temp = strchr(line, '\n');
+        // ½«»»ĞĞ·ûÌæ»»Îª×Ö·û´®ÖÕÖ¹·û
+        if (temp != NULL) {
+            *temp = '\0'; 
+        }
         token = strtok(line, ",");
         //È¡¿Î³ÌµÄidÖµ
         int course_id = atoi(token);
@@ -92,14 +96,14 @@ int readCourseInfo(struct course course_info[])//½ÓÊÜÒ»¸öÊı×é£¬½«ÎÄ¼şÖĞµÄ¿Î³ÌĞÅÏ
         int course_term = atoi(token);
         //course_info = (struct course*)realloc(course_info, (i+1)*sizeof(struct course));
         course_info[i].course_id = course_id;
-        course_info[i].course_name = course_name;
-        course_info[i].course_property = course_property;
+        strcpy(course_info[i].course_name,course_name);
+        strcpy(course_info[i].course_property,course_property);
         course_info[i].course_credit = course_credit;
         course_info[i].course_totalHour = course_totalHour;
         course_info[i].course_classHour = course_classHour;
         course_info[i].course_practiceHour = course_practiceHour;
         course_info[i].course_term = course_term;
-
+        i++;
     }
     //ĞøÎ²°Í£¬¸æËßÊı×é½ØÖÁ,¶Áµ½-1±íÊ¾Êı×é½ØÖÁÁË¡£
     course_info[i].course_classHour= -1;
@@ -107,8 +111,6 @@ int readCourseInfo(struct course course_info[])//½ÓÊÜÒ»¸öÊı×é£¬½«ÎÄ¼şÖĞµÄ¿Î³ÌĞÅÏ
     course_info[i].course_term= -1;
     course_info[i].course_totalHour= -1;
     course_info[i].course_credit= -1;
-    course_info[i].course_property= NULL;
-    course_info[i].course_name= NULL;
     course_info[i].course_id= -1;
     // ¹Ø±ÕÎÄ¼ş
     fclose(file);
@@ -143,7 +145,7 @@ int readStudentInfo(struct student student_info[]) //½ÓÊÜÒ»¸öÊı×é£¬½«ÎÄ¼şÖĞµÄÑ§É
             student_info[i].student_id = atoi(token);
             //È¡Ñ§ÉúµÄĞÕÃû
             token = strtok(NULL, ",");
-            student_info[i].student_name = token; 
+            strcpy(student_info[i].student_name,token); 
             //È¡ºóÃæ¿Î³ÌµÄidÖµ
             int j = 0;
             for (j = 0; j < MAX_COURSE-1; j++)

@@ -6,8 +6,8 @@
 typedef struct course
 {
     int course_id; //id
-    char* course_name; //课程名
-    char* course_property; //课程性质
+    char course_name[100]; //课程名
+    char course_property[100]; //课程性质
     int course_credit; //学分
     int course_totalHour; //总学时
     int course_classHour; //授课时长
@@ -16,7 +16,7 @@ typedef struct course
 };
 typedef struct student
 {
-    char* student_name; //学生名字
+    char student_name[100]; //学生名字
     int student_id; //学生id
     int student_selectedCourseId[MAX_COURSE]; //已选课程
 };

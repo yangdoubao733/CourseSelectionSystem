@@ -1,7 +1,7 @@
 //zhangyanhe
 #ifndef CSV
 #define CSV
-#define MAX_VALUE 514 // 最大值
+#define MAX_VALUE 512 // 最大值
 #define MAX_COURSE 50 // 最大课程数
 typedef struct course
 {
@@ -18,7 +18,7 @@ typedef struct student
 {
     char* student_name; //学生名字
     int student_id; //学生id
-    int student_selectedCourseId[50]; //已选课程
+    int student_selectedCourseId[MAX_COURSE]; //已选课程
 };
 
 //函数声明

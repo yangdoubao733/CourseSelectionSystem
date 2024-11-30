@@ -4,8 +4,8 @@
 #include"queryCourseInfo.h"
 #include"selectCourse.h"
 
-void menu(){
-    printf("1.褰曞叆璇剧▼\n2.鏌ョ湅鎵�鏈夎绋媆n3.鏌ヨ璇剧▼\n4.閫夋嫨璇剧▼\n璇疯緭鍏ヤ綘鎯充娇鐢ㄧ殑鍔熻兘");
+int menu(){
+    printf("1.录入课程\n2.查看所有课程\n3.查询课程\n4.选择课程\n请输入你想使用的功能");
     int n;
     scanf("%d",&n);
     switch (n)

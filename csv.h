@@ -1,7 +1,7 @@
 //zhangyanhe
 #ifndef CSV
 #define CSV
-#define MAX_VALUE 514 // æœ€å¤§å€¼
+#define MAX_VALUE 514 // ×î´óÖµ
 typedef struct course
 {
     int course_id;
@@ -20,10 +20,10 @@ typedef struct student
     int student_selectedCourseId[50];
 };
 
-//å‡½æ•°å£°æ˜
-struct course* readCourseInfo(struct course course_info[]); //è¿”å›ä¸€ä¸ªæ•°ç»„
-int writeCourseInfo(struct course new_course); //è¾“å…¥ä¸€ä¸ªæ•°ç»„ï¼Œå°†è¯¾ç¨‹å†™å…¥æ–‡ä»¶course.csv
-struct student* readStudentInfo(struct student* student_info); //è¿”å›ä¸€ä¸ªæ•°ç»„åŒ…å«æ‰€æœ‰å­¦ç”Ÿ
-int writeStudentInfo(); //å°†å­¦ç”Ÿä¿¡æ¯å†™å…¥æ–‡ä»¶student.csv
+//º¯ÊıÉùÃ÷
+void readCourseInfo(struct course course_info[]); //½ÓÊÜÒ»¸öÊı×é£¬½«ÎÄ¼şÖĞµÄ¿Î³ÌĞÅÏ¢¶ÁÈëÊı×éÖĞ
+int writeCourseInfo(struct course new_course); // ÊäÈë¿Î³ÌĞÅÏ¢²¢½«ÆäĞ´ÈëÎÄ¼şcourse.csv
+void readStudentInfo(struct student student_info[]); //½ÓÊÜÒ»¸öÊı×é£¬½«ÎÄ¼şÖĞµÄÑ§ÉúĞÅÏ¢¶ÁÈëÊı×éÖĞ
+int writeStudentInfo(struct student new_student); // ÊäÈëÑ§ÉúĞÅÏ¢²¢½«ÆäĞ´ÈëÎÄ¼şstudent.csv
 
 #endif

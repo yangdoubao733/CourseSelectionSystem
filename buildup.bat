@@ -1,0 +1,1 @@
+gcc -Wall -Wextra -Wpedantic -Wshadow -Wformat=2 -Wcast-align -Wconversion -Wsign-conversion -Wnull-dereference -g3 -O0 main.c menu.c displayCourseSources.c inputCourseSources.c queryCourseInfo.c selectCourse.c csv.c && .\a.exe
